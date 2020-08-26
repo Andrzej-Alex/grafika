@@ -99,7 +99,7 @@ let controls = new function() {
 
 function initGui() {
     let gui = new dat.GUI();
-    gui.add(controls, 'nbrTwists', -25, 25).step(1).onChange(updateMobius);
+    gui.add(controls, 'nbrTwists', -25, 25).step(1).name('half twists').onChange(updateMobius);
     gui.addColor(controls, 'color1').onChange(updateColor);
     gui.addColor(controls, 'color2').onChange(updateColor);
     gui.add(controls, 'ball').onChange(updateBall).listen();
