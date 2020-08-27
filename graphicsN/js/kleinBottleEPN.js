@@ -23,7 +23,7 @@ let heightSegments = 200;
 let nbrSegments = 200;
 let ball;
 let ballRadius = 0.5;
-let mepsilon = 0.01;
+let mepsilon = 0.001;
 
 let mats;
 let klein = null;
@@ -98,8 +98,8 @@ function makeBall(radius=0.5) {
 
 
 let controls = new function() {
-    this.color1 = '#1562c9';
-    this.color2 = '#1562c9';
+    this.color1 = '#008080';
+    this.color2 = '#8A2BE2';
     this.opacity2 = 1;
     this.ball = false;
     this.v = 0.5;
