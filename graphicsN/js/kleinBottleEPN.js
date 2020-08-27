@@ -150,7 +150,6 @@ function makeMoveOnParametricSurface(f, offset, eps=0.01, isKlein=true) {
                 // Stitch at u=0
                 // Require v such that cos(vp + pi) = cosvp' and sinvp == sinvp'
                 // where vp = 2pi*v
-                // pos.y = pos.y - 0.5 * pos.y to fix x coordinate across seam 
                 pos.y = 0.5 - pos.y;
                 if (pos.y <= 0) pos.y += 1;
                 normalSign *= -1;
