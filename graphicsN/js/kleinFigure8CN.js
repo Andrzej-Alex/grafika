@@ -16,8 +16,8 @@ let clock = new THREE.Clock();
 
 let subject = new MyUtils.Subject();
 
-let radius = 3;
-let heightSegments = 80; 
+let radius = 2.5;
+let heightSegments = 60; 
 let nbrSegments = 300;
 
 let mats;
@@ -54,9 +54,9 @@ function makeKleinFigure8ParametricSurface(radius, startAngle, section, sectionu
         let cosu = Math.cos(up), sinu = Math.sin(up);
         let coshalfu = Math.cos(up/2), sinhalfu = Math.sin(up/2);
         let cosv = Math.cos(vp), sinv = Math.sin(vp), sin2v = Math.sin(2*vp);
-        let x = cosu * (radius + coshalfu * sinv - sinhalfu * sin2v);
-        let y = sinu * (radius + coshalfu * sinv - sinhalfu * sin2v);
-        let z = sinhalfu * sinv + coshalfu * sin2v;
+        let x = cosu * (radius + coshalfu * sinv - sinhalfu * sin2v / 2);
+        let y = sinu * (radius + coshalfu * sinv - sinhalfu * sin2v / 2);
+        let z = sinhalfu * sinv + coshalfu * sin2v / 2;
         res.set(x, y, z);
     }
     return f;
@@ -91,6 +91,7 @@ function initGui() {
 function updateKlein() {
     let color1 = new THREE.Color(controls.color1);
     let color2 = new THREE.Color(controls.color2);
+    let opacity2 = controls.opacity2;
     let sectionu = controls.section;
     if (klein)
         scene.remove(klein);
@@ -110,6 +111,7 @@ function updateKlein() {
     startAngle = 0.75;
     let geom2 = makeKleinFigure8Geometry(radius, nbrSegments, heightSegments, startAngle, section, sectionu);
     matArgs.transparent = true;
+    matArgs.opacity = opacity2;
     matArgs.side = THREE.FrontSide;
     matArgs.color = color2;
     mats.push(new THREE.MeshPhongMaterial(matArgs));
@@ -137,7 +139,7 @@ function init() {
     });
     let canvasRatio = window.innerWidth / window.innerHeight;
     camera = new THREE.PerspectiveCamera( 40, canvasRatio, 1, 1000);
-    camera.position.set(0, 0, 12);
+    camera.position.set(0, 0, 10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     cameraControls = new OrbitControls(camera, renderer.domElement);
