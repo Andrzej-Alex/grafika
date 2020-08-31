@@ -18,8 +18,7 @@ let clock = new THREE.Clock();
 
 let subject = new MyUtils.Subject();
 
-let mobiusHeight = 6;
-let heightSegments = 200; 
+let heightSegments = 50; 
 let nbrSegments = 200;
 let ball;
 let ballRadius = 0.5;
