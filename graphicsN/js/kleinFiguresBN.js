@@ -93,7 +93,7 @@ function initGui() {
 function updateKlein() {
     let color1 = new THREE.Color(controls.color1);
     let color2 = new THREE.Color(controls.color2);
-    let n = controls.n;
+    let n = -controls.n;
     let a = 2 ** controls.a;
     let opacity2 = controls.opacity2;
     let radius = controls.radius;
