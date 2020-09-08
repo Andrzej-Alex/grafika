@@ -61,7 +61,6 @@ function createRuledTorus(model, nbrSides, nbrGons, twist, radius) {
         let specMat = new THREE.MeshLambertMaterial(matArgs);
         specMats.push(specMat);
         let p3 = new THREE.Object3D();
-        // p3.rotation.z = (i * twist / n) * twopi;
         p3.rotation.z = (i / nbrGons) * twopi * (twist / nbrSides);
         subject.register(p3);
         p3.update = spin;
@@ -122,7 +121,7 @@ let controls = new function() {
 
 function initGui() {
     let gui = new dat.GUI();
-    gui.add(controls, 'nbrSides', 2, 6).step(1).name('nbr sides').onChange(updateRuledTorus);
+    gui.add(controls, 'nbrSides', 2, 6).step(1).name('n (nbr sides)').onChange(updateRuledTorus);
     gui.add(controls, 'nbrGons', 20, 200).name('nbr polygons').onChange(updateRuledTorus);
     gui.add(controls, 'k', -12, 12).step(1).name('k (k/n twists)').onChange(updateRuledTorus);    
     gui.add(controls, 'rps', -0.2, 0.2, 0.01);
