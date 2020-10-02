@@ -130,7 +130,7 @@ function updateCrossCap() {
     if (crossCap)
         scene.remove(crossCap);
     crossCap = new THREE.Object3D();
-    // first Mobius band
+    // disk
     let startAngle = 0;
     let section = 0.5;
     let geom = makeCrossCapGeometry(nbrSegments, heightSegments, startAngle, section, a);
@@ -142,7 +142,7 @@ function updateCrossCap() {
     matArgs.side = THREE.BackSide;
     mats.push(new THREE.MeshPhongMaterial(matArgs));
     let back = new THREE.Mesh(geom, mats[1]);
-    // second Mobius band
+    // Mobius band
     startAngle = 0.5;
     let geom2 = makeCrossCapGeometry(nbrSegments, heightSegments, startAngle, section, a);
     matArgs.side = THREE.FrontSide;
