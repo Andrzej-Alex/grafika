@@ -83,7 +83,7 @@ function makeCrossCapGeometry(radialSegs, heightSegs, startAngle=0, section=1, a
 let controls = new function() {
     this.color1 = '#008080';
     this.color2 = '#EB005D';
-    this.surface = 'disk';
+    this.surface = 'band 1';
     this.opacity = 1;
     this.fourcolors = false;
 }
