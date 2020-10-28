@@ -55,17 +55,16 @@ function makeSphereSnowflake(level, scale, geom, nbrPoints, involute=false) {
         let root = new THREE.Object3D();
         sphere.add(root);
         root.scale.set(scale, scale, scale);
-        let tf
+        let tf;
         if (!involute) tf = (sphereRadius * (1 + scale)) / scale
         else tf = (sphereRadius * (1 - scale)) / scale;
         for (let i = 0; i < nbrPoints; i++) {
             let root2 = new THREE.Object3D();
             let v = MyUtils.getRandomPointOnSphere(sphereRadius);
-            let v2 = v.clone();
-            v2.multiplyScalar(tf);
+            let v2 = v.clone().multiplyScalar(tf);
             root2.position.set(v2.x, v2.y, v2.z);
             root2.itsPos = v;  // save for updateScale()
-            root2.add(makeSphereSnowflake(level-1, scale, geom, nbrPoints));
+            root2.add(makeSphereSnowflake(level-1, scale, geom, nbrPoints, involute));
             root.add(root2);
         }
     }
