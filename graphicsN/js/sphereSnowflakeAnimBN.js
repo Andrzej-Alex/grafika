@@ -29,18 +29,18 @@ function createScene() {
     let nbrLevels = controls.nbrLevels;
     let color = new THREE.Color(controls.color);
     let opacity = controls.opacity;
-    let matArgs = {color: color, shininess: 80, transparent: true, opacity: opacity, side: THREE.FrontSide};
+    let matArgs = {color: color, shininess: 60, transparent: true, opacity: opacity, side: THREE.FrontSide};
 
     materials = [];
     for (let i = 0; i <= maxLevels+1; i++)
         materials.push(new THREE.MeshPhongMaterial(matArgs));
-    sphereGeom = new THREE.SphereGeometry(sphereRadius, 20, 20);
+    sphereGeom = new THREE.SphereGeometry(sphereRadius, 24, 24);
     snowflake = makeSphereSnowflake(controls.nbrLevels, controls.scale, sphereGeom, controls.nbrPoints);
     let light = new THREE.PointLight(0xFFFFFF, 1.0, 1000 );
-    light.position.set(10, 20, 20);
+    light.position.set(20, 40, 50);
     let light2 = new THREE.PointLight(0xFFFFFF, 0.6, 1000 );
     light2.position.set(-20, -20, -20);
-    let ambientLight = new THREE.AmbientLight(0x111111);
+    let ambientLight = new THREE.AmbientLight(0x222222);
     scene.add(light);
     scene.add(light2);
     scene.add(ambientLight);
@@ -159,13 +159,13 @@ function genColors(flag) {
 function genRandomColors() {
     if (controls.randomColors)
         for (let mat of materials) 
-            mat.color = MyUtils.getRandomColor(0.5, 0.4, 0.6);
+            mat.color = MyUtils.getRandomColor(0.3, 0.4, 0.6);
 }
 
 // last color assigned by color controller
 let lastColor = null;
 let amountToRotate = null;
-let incColors = 0.0005;
+let incColorRPS = 0.01;
 
 function render() {
     var delta = clock.getDelta();
@@ -181,6 +181,7 @@ function render() {
     amountToRotate = MyUtils.rpsToRadians(controls.rps, delta);
     subject.notify(delta);
     // rotate colors
+    let incColors = incColorRPS * delta;
     if (controls.rotateColors && controls.randomColors) {
         for (let mat of materials) {
             mat.color.offsetHSL(incColors, 0, 0);
