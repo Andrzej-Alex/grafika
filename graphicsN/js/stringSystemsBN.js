@@ -119,6 +119,42 @@ function makeModelsMap() {
             return root;
         }
     });
+    let bxz = 1;  // side of square in xz-plane
+    models.set('squares', {
+        'transformer': function(i, base, stringSystem) {
+            let nrows = Math.floor(Math.sqrt(base));
+            let ncols = Math.floor((base - 1) / nrows) + 1;
+            let minz = -0.5 * (nrows - 1) * (bxz);
+            let root = new THREE.Object3D();
+            let row = i % nrows;
+            let col = Math.floor(i / nrows);
+            root.position.y = d;
+            root.position.z = minz + (row * bxz);
+            root.position.x = col * bxz - (0.5 * bxz) + (0.5 / ncols) * bxz; 
+            root.scale.set(1/ncols, 1, 1/nrows);
+            root.add(stringSystem);
+            return root;
+        },
+        'digitsGraph': function(base) {
+            let geom = new THREE.BoxGeometry(bxz, d, bxz);
+            let matArgs = {shininess: 80};
+            let root = new THREE.Object3D();
+            let nrows = Math.floor(Math.sqrt(base));
+            let minz = -0.5 * (nrows - 1) * bxz;
+            for (let i = 0; i < base; i++) {
+                let mat = new THREE.MeshPhongMaterial(matArgs);
+                mat.color = new THREE.Color().setHSL(i / base, 1.0, 0.5);
+                let mesh = new THREE.Mesh(geom, mat);
+                mesh.position.y = 0.5 * d;
+                let row = i % nrows;
+                let col = Math.floor(i / nrows);
+                mesh.position.z = minz + (row * bxz);
+                mesh.position.x = col * bxz;
+                root.add(mesh);
+            }
+            return root;
+        }
+    });
     // disks models
     let dd = 0.05;  // depth of disks along y-axis
     let r = 0.5;    // radius of disks
@@ -199,7 +235,7 @@ function initGui() {
     var gui = new dat.GUI();
     gui.add(controls, 'base', 2, 10).step(1).onChange(update);
     gui.add(controls, 'n', 1, maxLevels).step(1).onChange(update);
-    let modelTypes = ['keyboard', 'boxes', 'disks', 'spheres'];
+    let modelTypes = ['keyboard', 'boxes', 'squares', 'disks', 'spheres'];
     gui.add(controls, 'model', modelTypes).onChange(update);
 }
 

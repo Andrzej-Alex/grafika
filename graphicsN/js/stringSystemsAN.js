@@ -1,7 +1,7 @@
 /***********
- * stringSystemsE.js
+ * stringSystemsAN.js
  * M. Laszlo
- * November 2020
+ * January 2021
  ***********/
 
 
