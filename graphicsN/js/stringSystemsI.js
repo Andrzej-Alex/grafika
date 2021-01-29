@@ -45,21 +45,18 @@ function createScene() {
     // scene.add(axes);
 }
 
-
-
 function makeStringSystem(n, base, transformer, digitsGraph, includeSet) {
     let root = new THREE.Object3D();
-    if (n > 0) {
-        root.add(digitsGraph.clone());
+    root.add(digitsGraph.clone());
+    if (n > 1) {
         let s = makeStringSystem(n-1, base, transformer, digitsGraph, includeSet);
-        for (let i = 0; i < base; i++) {
-            if (includeSet.has(i)) {
-                root.add(transformer(i, base, s.clone(), n));
-            }
+        for (let i of includeSet) {
+            root.add(transformer(i, base, s.clone(), n));
         }
     }
     return root;
 }
+
 
 
 function makeModelsMap() {
