@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Graphics</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+            body {
+                background-color: #fff;
+                margin: 0;
+                overflow: hidden;
+        </style>
+
+        <script src="build/complex.js"></script>
+		<script type="text/javascript">
+
+		function getParameterByName(name) {
+			var match = RegExp('[?&]' + name + '=([^&]*)')
+							.exec(window.location.search);
+			return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        }
+        function init() {
+		    var loadScript = getParameterByName('load');
+		    if (typeof loadScript !== 'undefined') {
+			    var thescript = document.createElement('script');
+			    thescript.setAttribute('type','module');
+			    thescript.setAttribute('src',loadScript);
+                thescript.setAttribute('onerror',"alert('script not found')");
+			    document.getElementsByTagName('head')[0].appendChild(thescript);
+		    }
+        }
+		</script>
+	</head>
+	<body onload="init()">
+        <div id="container">
+        </div>
+	</body>
+</html>
