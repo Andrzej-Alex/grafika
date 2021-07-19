@@ -308,7 +308,7 @@ function init() {
     window.addEventListener( 'resize', onWindowResize, false );
     // picking
     // window.addEventListener( 'mousedown', onPointerDown );
-    window.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('clickstart', onPointerDown);
     renderer.setAnimationLoop(function () {
         render();
     });
