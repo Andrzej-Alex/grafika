@@ -312,7 +312,7 @@ function init() {
     document.body.appendChild( renderer.domElement );
     window.addEventListener( 'resize', onWindowResize, false );
     // picking
-    window.addEventListener( 'mousedown', onPointerDown );
+    window.addEventListener( 'pointerdown', onPointerDown );
     renderer.setAnimationLoop(function () {
         render();
     });
