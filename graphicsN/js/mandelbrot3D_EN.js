@@ -244,7 +244,7 @@ function makeShaderMaterialArgs(frame, colors, limit) {
     }
 };
 
-const maxLevels = 64;
+const maxLevels = 128;
 let controls = new function() {
     this.levels = 16;
     this.colorModel = 'rainbow';
