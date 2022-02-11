@@ -22,14 +22,14 @@ let landscape;
 let frameSquare, transformControls;
 let frameIsActive = false;
 let upperMesh;  // 3D landscape
-let resolution = 240;  // 3D landscape is res x res
+let resolution = 300;  // 3D landscape is res x res
 
 // frame = [minr, mini, width, height] 
 let frame = [-2.1, -1.5, 3.1, 3.001];
 
 
 function createScene() {
-    let limit = 8;
+    let limit = 16;
     landscape = makeMandelbrotLandscape(limit, resolution, 0.01);
     scene.add(landscape);
 
@@ -130,7 +130,9 @@ function invertMandelbrotLandscape() {
     pos.needsUpdate = true;
 }
 
-
+let R = 16;
+let R2 = R * R;
+let Rp = Math.log2(Math.log(R));
 
 function mandelbrotFrac(cr, ci, limit) {
     let zr = 0.0;
@@ -143,13 +145,12 @@ function mandelbrotFrac(cr, ci, limit) {
         zi = 2.0 * zr * zi + ci;
         zr = zr2 - zi2 + cr;
         // has (zr,zi) escaped?
-        if (zr2 + zi2 > 16.0)
+        if (zr2 + zi2 > R2)
             break;
     }
     if (i < limit) {
         let modulus = Math.sqrt(zr2 + zi2);
-        let f = Math.log2(Math.log2(modulus));
-        return (i+1) - f;
+        return i + Rp - Math.log2(Math.log(modulus));
     } else {
         return limit;
     }
@@ -245,7 +246,7 @@ function makeShaderMaterialArgs(frame, colors, limit) {
 
 const maxLevels = 64;
 let controls = new function() {
-    this.levels = 8;
+    this.levels = 16;
     this.colorModel = 'rainbow';
     this.color1 = '#1562c9';
     this.color2 = '#e22e2a';
