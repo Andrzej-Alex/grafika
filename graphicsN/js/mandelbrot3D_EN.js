@@ -132,7 +132,7 @@ function invertMandelbrotLandscape() {
 
 let R = 16;
 let R2 = R * R;
-let Rp = Math.log2(Math.log(R));
+let Rp = Math.log2(Math.log2(R));
 
 function mandelbrotFrac(cr, ci, limit) {
     let zr = 0.0;
@@ -150,7 +150,7 @@ function mandelbrotFrac(cr, ci, limit) {
     }
     if (i < limit) {
         let modulus = Math.sqrt(zr2 + zi2);
-        return i + Rp - Math.log2(Math.log(modulus));
+        return i + Rp - Math.log2(Math.log2(modulus));
     } else {
         return limit;
     }
