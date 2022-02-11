@@ -148,7 +148,7 @@ function mandelbrotFrac(cr, ci, limit) {
     }
     if (i < limit) {
         let modulus = Math.sqrt(zr2 + zi2);
-        let f = Math.log2(Math.log2(modulus)) / 4;
+        let f = Math.log2(Math.log2(modulus));
         return (i+1) - f;
     } else {
         return limit;
