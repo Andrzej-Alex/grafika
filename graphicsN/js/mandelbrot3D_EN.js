@@ -22,7 +22,7 @@ let landscape;
 let frameSquare, transformControls;
 let frameIsActive = false;
 let upperMesh;  // 3D landscape
-let resolution = 200;  // 3D landscape is res x res
+let resolution = 240;  // 3D landscape is res x res
 
 // frame = [minr, mini, width, height] 
 let frame = [-2.1, -1.5, 3.1, 3.001];
