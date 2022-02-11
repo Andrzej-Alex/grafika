@@ -83,7 +83,7 @@ function makeMandelbrotLandscape(limit, res, zscale=1.0) {
 
 function make3DLandscape(frame, size, res, colors, limit) {
     let plane = mandelbrotLandscapeGeom(frame, size, res, colors, limit);
-    let matArgs = {side: THREE.DoubleSide, shininess: 20, vertexColors: true};
+    let matArgs = {side: THREE.DoubleSide, shininess: 30, vertexColors: true};
     let mat = new THREE.MeshPhongMaterial(matArgs);
     let mesh = new THREE.Mesh(plane, mat);
     return mesh;
